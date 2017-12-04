@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingsoft.cms.dao.CustomVideoDao">
+  <resultMap id="BaseResultMap" type="com.mingsoft.cms.entity.CustomVideoEntity">
+    <id column="id" jdbcType="BIGINT" property="videoId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="url1" jdbcType="VARCHAR" property="url1" />
+    <result column="des1" jdbcType="VARCHAR" property="des1" />
+    <result column="uploadId1" jdbcType="BIGINT" property="uploadid1" />
+    <result column="uploadName1" jdbcType="VARCHAR" property="uploadname1" />
+    <result column="uploadPic1" jdbcType="VARCHAR" property="uploadpic1" />
+    <result column="uploadTime1" jdbcType="TIMESTAMP" property="uploadtime1" />
+    <result column="url2" jdbcType="VARCHAR" property="url2" />
+    <result column="des2" jdbcType="VARCHAR" property="des2" />
+    <result column="uploadId2" jdbcType="BIGINT" property="uploadid2" />
+    <result column="uploadName2" jdbcType="VARCHAR" property="uploadname2" />
+    <result column="uploadPic2" jdbcType="VARCHAR" property="uploadpic2" />
+    <result column="uploadTime2" jdbcType="TIMESTAMP" property="uploadtime2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, type, url1, des1, uploadId1, uploadName1, uploadPic1, uploadTime1, url2,
+    des2, uploadId2, uploadName2, uploadPic2, uploadTime2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom_video
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from custom_video
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <select id="selectSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom_video
+    <where>
+      <if test="id != null">
+        id =  #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        AND name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="url1 != null">
+        AND url1 = #{url1,jdbcType=VARCHAR}
+      </if>
+      <if test="des1 != null">
+        AND des1 = #{des1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid1 != null">
+        AND uploadid1 = #{uploadid1,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname1 != null">
+        AND uploadname1 = #{uploadname1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic1 != null">
+        AND uploadpic1 = #{uploadpic1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime1 != null">
+        AND uploadtime1 = #{uploadtime1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="url2 != null">
+        AND url2 = #{url2,jdbcType=VARCHAR}
+      </if>
+      <if test="des2 != null">
+        AND des2 = #{des2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid2 != null">
+        AND uploadid2 = #{uploadid2,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname2 != null">
+        AND uploadname2 = #{uploadname2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic2 != null">
+        AND uploadpic2 = #{uploadpic2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime2 != null">
+        AND uploadtime2 = #{uploadtime2,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
+    delete from custom_video
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        AND name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="url1 != null">
+        AND url1 = #{url1,jdbcType=VARCHAR}
+      </if>
+      <if test="des1 != null">
+        AND des1 = #{des1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid1 != null">
+        AND uploadid1 = #{uploadid1,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname1 != null">
+        AND uploadname1 = #{uploadname1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic1 != null">
+        AND uploadpic1 = #{uploadpic1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime1 != null">
+        AND uploadtime1 = #{uploadtime1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="url2 != null">
+        AND url2 = #{url2,jdbcType=VARCHAR}
+      </if>
+      <if test="des2 != null">
+        AND des2 = #{des2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid2 != null">
+        AND uploadid2 = #{uploadid2,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname2 != null">
+        AND uploadname2 = #{uploadname2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic2 != null">
+        AND uploadpic2 = #{uploadpic2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime2 != null">
+        AND uploadtime2 = #{uploadtime2,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </delete>
+
+  <delete id="deleteByIds" parameterType="java.util.Map">
+    delete from custom_video
+    <where>
+      <if test="idlist !=null">
+        id in
+        <foreach collection="idlist" item="item" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+
+  <insert id="insert" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
+    insert into custom_video (id, name, type,
+    url1, des1, uploadId1,
+    uploadName1, uploadPic1, uploadTime1,
+    url2, des2, uploadId2,
+    uploadName2, uploadPic2, uploadTime2
+    )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+    #{url1,jdbcType=VARCHAR}, #{des1,jdbcType=VARCHAR}, #{uploadid1,jdbcType=BIGINT},
+    #{uploadname1,jdbcType=VARCHAR}, #{uploadpic1,jdbcType=VARCHAR}, #{uploadtime1,jdbcType=TIMESTAMP},
+    #{url2,jdbcType=VARCHAR}, #{des2,jdbcType=VARCHAR}, #{uploadid2,jdbcType=BIGINT},
+    #{uploadname2,jdbcType=VARCHAR}, #{uploadpic2,jdbcType=VARCHAR}, #{uploadtime2,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
+    insert into custom_video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="url1 != null">
+        url1,
+      </if>
+      <if test="des1 != null">
+        des1,
+      </if>
+      <if test="uploadid1 != null">
+        uploadId1,
+      </if>
+      <if test="uploadname1 != null">
+        uploadName1,
+      </if>
+      <if test="uploadpic1 != null">
+        uploadPic1,
+      </if>
+      <if test="uploadtime1 != null">
+        uploadTime1,
+      </if>
+      <if test="url2 != null">
+        url2,
+      </if>
+      <if test="des2 != null">
+        des2,
+      </if>
+      <if test="uploadid2 != null">
+        uploadId2,
+      </if>
+      <if test="uploadname2 != null">
+        uploadName2,
+      </if>
+      <if test="uploadpic2 != null">
+        uploadPic2,
+      </if>
+      <if test="uploadtime2 != null">
+        uploadTime2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url1 != null">
+        #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="des1 != null">
+        #{des1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadid1 != null">
+        #{uploadid1,jdbcType=BIGINT},
+      </if>
+      <if test="uploadname1 != null">
+        #{uploadname1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadpic1 != null">
+        #{uploadpic1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime1 != null">
+        #{uploadtime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url2 != null">
+        #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="des2 != null">
+        #{des2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadid2 != null">
+        #{uploadid2,jdbcType=BIGINT},
+      </if>
+      <if test="uploadname2 != null">
+        #{uploadname2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadpic2 != null">
+        #{uploadpic2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime2 != null">
+        #{uploadtime2,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
+    update custom_video
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url1 != null">
+        url1 = #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="des1 != null">
+        des1 = #{des1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadid1 != null">
+        uploadId1 = #{uploadid1,jdbcType=BIGINT},
+      </if>
+      <if test="uploadname1 != null">
+        uploadName1 = #{uploadname1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadpic1 != null">
+        uploadPic1 = #{uploadpic1,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime1 != null">
+        uploadTime1 = #{uploadtime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url2 != null">
+        url2 = #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="des2 != null">
+        des2 = #{des2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadid2 != null">
+        uploadId2 = #{uploadid2,jdbcType=BIGINT},
+      </if>
+      <if test="uploadname2 != null">
+        uploadName2 = #{uploadname2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadpic2 != null">
+        uploadPic2 = #{uploadpic2,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime2 != null">
+        uploadTime2 = #{uploadtime2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
+    update custom_video
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      url1 = #{url1,jdbcType=VARCHAR},
+      des1 = #{des1,jdbcType=VARCHAR},
+      uploadId1 = #{uploadid1,jdbcType=BIGINT},
+      uploadName1 = #{uploadname1,jdbcType=VARCHAR},
+      uploadPic1 = #{uploadpic1,jdbcType=VARCHAR},
+      uploadTime1 = #{uploadtime1,jdbcType=TIMESTAMP},
+      url2 = #{url2,jdbcType=VARCHAR},
+      des2 = #{des2,jdbcType=VARCHAR},
+      uploadId2 = #{uploadid2,jdbcType=BIGINT},
+      uploadName2 = #{uploadname2,jdbcType=VARCHAR},
+      uploadPic2 = #{uploadpic2,jdbcType=VARCHAR},
+      uploadTime2 = #{uploadtime2,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

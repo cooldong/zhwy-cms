@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ms-mcms:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ms-mcms.war">
+      <element id="artifact" artifact-name="ms-mcms:war exploded" />
+    </root>
+  </artifact>
+</component>

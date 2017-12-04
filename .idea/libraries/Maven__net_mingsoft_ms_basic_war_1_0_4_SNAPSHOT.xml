@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.mingsoft:ms-basic:war:1.0.4-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-basic/1.0.4-SNAPSHOT/ms-basic-1.0.4-20171116.075847-14.war!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-basic/1.0.4-SNAPSHOT/ms-basic-1.0.4-20171116.075847-14-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-basic/1.0.4-SNAPSHOT/ms-basic-1.0.4-20171116.075847-14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

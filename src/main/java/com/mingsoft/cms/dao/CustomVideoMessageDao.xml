@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mingsoft.cms.dao.CustomVideoMessageDao">
+  <resultMap id="BaseResultMap" type="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    <id column="id" jdbcType="INTEGER" property="messageId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="createId" jdbcType="BIGINT" property="createid" />
+    <result column="createName" jdbcType="VARCHAR" property="createname" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="videoId" jdbcType="BIGINT" property="videoid" />
+    <result column="oknum" jdbcType="INTEGER" property="oknum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, comment, createId, createName, createTime, type, pid, videoId, oknum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from custom_video_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from custom_video_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByIds" parameterType="java.util.Map">
+    delete from custom_video_message
+    <where>
+      <if test="idlist !=null">
+        id in
+        <foreach collection="idlist" item="item" open="(" close=")" separator=",">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </delete>
+
+
+  <select id="selectSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom_video_message
+    <where>
+      <if test="id != null">
+       id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="comment != null">
+        AND comment = #{comment,jdbcType=VARCHAR}
+      </if>
+      <if test="createid != null">
+        AND createId = #{createid,jdbcType=BIGINT}
+      </if>
+      <if test="createname != null">
+        AND createName = #{createname,jdbcType=VARCHAR}
+      </if>
+      <if test="createtime != null">
+        AND createTime = #{createtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="pid != null">
+        AND pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="videoid != null">
+        AND videoId = #{videoid,jdbcType=BIGINT}
+      </if>
+      <if test="oknum != null">
+        AND oknum = #{oknum,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    delete from custom_video_message
+    <where>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="comment != null">
+        AND comment = #{comment,jdbcType=VARCHAR}
+      </if>
+      <if test="createid != null">
+        AND createId = #{createid,jdbcType=BIGINT}
+      </if>
+      <if test="createname != null">
+        AND createName = #{createname,jdbcType=VARCHAR}
+      </if>
+      <if test="createtime != null">
+        AND createTime = #{createtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="pid != null">
+        AND pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="videoid != null">
+        AND videoId = #{videoid,jdbcType=BIGINT}
+      </if>
+      <if test="oknum != null">
+        AND oknum = #{oknum,jdbcType=INTEGER}
+      </if>
+    </where>
+  </delete>
+
+
+  <insert id="insert" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    insert into custom_video_message (id, comment, createId, 
+      createName, createTime, type, 
+      pid, videoId, oknum)
+    values (#{id,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{createid,jdbcType=BIGINT}, 
+      #{createname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, 
+      #{pid,jdbcType=BIGINT}, #{videoid,jdbcType=BIGINT}, #{oknum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    insert into custom_video_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="createid != null">
+        createId,
+      </if>
+      <if test="createname != null">
+        createName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="videoid != null">
+        videoId,
+      </if>
+      <if test="oknum != null">
+        oknum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null">
+        #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="createname != null">
+        #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="videoid != null">
+        #{videoid,jdbcType=BIGINT},
+      </if>
+      <if test="oknum != null">
+        #{oknum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    update custom_video_message
+    <set>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createid != null">
+        createId = #{createid,jdbcType=BIGINT},
+      </if>
+      <if test="createname != null">
+        createName = #{createname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="videoid != null">
+        videoId = #{videoid,jdbcType=BIGINT},
+      </if>
+      <if test="oknum != null">
+        oknum = #{oknum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
+    update custom_video_message
+    set comment = #{comment,jdbcType=VARCHAR},
+      createId = #{createid,jdbcType=BIGINT},
+      createName = #{createname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=BIGINT},
+      videoId = #{videoid,jdbcType=BIGINT},
+      oknum = #{oknum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

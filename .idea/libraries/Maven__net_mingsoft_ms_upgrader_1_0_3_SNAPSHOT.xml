@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.mingsoft:ms-upgrader:1.0.3-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-upgrader/1.0.3-SNAPSHOT/ms-upgrader-1.0.3-20170929.141410-12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-upgrader/1.0.3-SNAPSHOT/ms-upgrader-1.0.3-20170929.141410-12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mingsoft/ms-upgrader/1.0.3-SNAPSHOT/ms-upgrader-1.0.3-20170929.141410-12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

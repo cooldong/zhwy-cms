@@ -6,6 +6,13 @@
 		<@ms.form isvalidation=true name="articleForm" action="${managerPath}/cms/article/${autoCURD}.do">
 			<@ms.text name="basicTitle" colSm="2" width="400" label="文章标题"	title="文章标题" size="5"  placeholder="请输入文章标题"  value="${article.basicTitle?default('')}"  validation={"maxlength":"300","required":"true", "data-bv-notempty-message":"文章标题不能为空","data-bv-stringlength-message":"标题在300个字符以内!"}/>
 			<@ms.text name="basicSort"  colSm="2" width="200" label="自定义顺序" title="自定义顺序" size="5"  placeholder="请输入文章顺序" value="${article.basicSort?c?default(0)}" validation={"data-bv-between":"true","required":"true", "data-bv-between-message":"自定义顺序必须大于0","data-bv-between-min":"0", "data-bv-between-max":"99999999","data-bv-notempty-message":"自定义顺序不能为空"}/>
+
+			<#if (articleType == "11" || articleType == "12")>
+			    <div >
+					<@ms.text name="basicSort"  colSm="2" width="200"  value="${article.basicSort?c?default(0)}" validation={"required":"true"}/>
+				</div>
+			</#if>
+
 			<#if articleType?has_content>
 				<@ms.checkboxlist colSm="2" name="checkbox" label="文章属性" list=articleType listKey="key"  listValue="value" />
 			</#if>

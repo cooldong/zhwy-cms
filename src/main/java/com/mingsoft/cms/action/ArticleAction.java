@@ -226,12 +226,18 @@ public class ArticleAction extends BaseAction {
 	public String add(ModelMap mode, HttpServletRequest request) {
 		int categoryId = this.getInt(request, "categoryId", 0);
 		String categoryTitle = request.getParameter("categoryTitle");
+		String articleType1 = request.getParameter("articleType1");
 		// 判断栏目是否为""
 		if (StringUtil.isBlank(categoryTitle)) {
 			categoryTitle = null;
 		}
-		// 文章属性
-		mode.addAttribute("articleType", articleType());
+		if(articleType1.equals("12") || articleType1.equals("11")){
+			mode.addAttribute("articleType", articleType1);
+		}else {
+			// 文章属性
+			mode.addAttribute("articleType", articleType());
+		}
+
 
 		// 站点ID
 		int appId = this.getAppId(request);

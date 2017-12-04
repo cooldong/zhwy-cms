@@ -38,7 +38,19 @@
 	 <@ms.modalButton>
  		<@ms.button class="btn btn-danger rightDelete" value="确定"/>
  	</@ms.modalButton>
-</@ms.modal>			
+</@ms.modal>
+
+<@ms.modal  modalName="selDict" title="选择类型" >
+	<@ms.modalBody>
+		<#assign peopleSexs=[{"id":"12","name":"视频"},{"id":"11","name":"其他"}]>
+		<@ms.radio name="selDictRadio" label="" list=peopleSexs listKey="id" listValue="name" />
+		<@ms.modalButton>
+        <!--模态框按钮组-->
+			<@ms.button  value="确认"  id="selDictBtn"  />
+		</@ms.modalButton>
+	</@ms.modalBody>
+</@ms.modal>
+
 <script>
 	$(function(){	
 		$("#articleListTable").bootstrapTable({
@@ -82,8 +94,13 @@
 	});
 	//添加文章
 	$("#addButton").click(function(){
-		location.href = base+"${baseManager}/cms/article/add.do?categoryId=${categoryId?default(0)}&modelId=${Session.model_id_session?default(0)}&categoryTitle=${categoryTitle?default('')}"; 
-	});	
+        $(".selDict").modal();
+		<#--location.href = base+"${baseManager}/cms/article/add.do?categoryId=${categoryId?default(0)}&modelId=${Session.model_id_session?default(0)}&categoryTitle=${categoryTitle?default('')}"; -->
+	});
+        $("#selDictBtn").click(function(){
+		location.href = base+"${baseManager}/cms/article/add.do?categoryId=${categoryId?default(0)}&modelId=${Session.model_id_session?default(0)}&categoryTitle=${categoryTitle?default('')}&articleType1="+$("input[type=radio][name=selDictRadio]:checked").val();
+		<#--location.href ="${managerPath}/custom/mdiy/dict/form.do?dictType="+$("input[type=radio][name=selDictRadio]:checked").val();-->
+        })
 	//查询文章标题
 	$("#submitSearch").click(function(){
 		var search = $("form[name='searchForm']").serializeJSON();

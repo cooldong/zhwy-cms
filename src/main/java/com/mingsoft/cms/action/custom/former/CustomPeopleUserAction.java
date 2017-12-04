@@ -64,10 +64,15 @@ public class CustomPeopleUserAction extends com.mingsoft.people.action.BaseActio
 	@RequestMapping("/getDict")
 	@ResponseBody
 	public void get(@ModelAttribute DictEntity dict, HttpServletResponse response, HttpServletRequest request, ModelMap model){
-		dict.setAppId(1);
-		DictEntity _dict = (DictEntity)dictBiz.getEntity(dict);
-		List<DictEntity> _dicts = (List<DictEntity>) dictBiz.query(dict);
-		this.outJson(response, _dicts);
+//		dict.setAppId(1);
+		DictEntity _dict = new DictEntity();
+		_dict.setDictType("11");
+		_dict.setAppId(1);
+		List<DictEntity> _dicts11 = (List<DictEntity>) dictBiz.query(_dict);
+		_dict.setDictType("12");
+		List<DictEntity> _dicts12 = (List<DictEntity>) dictBiz.query(_dict);
+		_dicts11.addAll(_dicts12);
+		this.outJson(response, _dicts11);
 	}
 
 	/**

@@ -1,8 +1,13 @@
 package com.mingsoft.cms.action.custom.former;
 
+import com.alibaba.fastjson.JSONArray;
 import com.mingsoft.base.entity.BaseEntity;
 import com.mingsoft.base.filter.DateValueFilter;
 import com.mingsoft.base.filter.DoubleValueFilter;
+import com.mingsoft.basic.biz.IColumnBiz;
+import com.mingsoft.basic.entity.ColumnEntity;
+import com.mingsoft.cms.biz.IArticleBiz;
+import com.mingsoft.cms.entity.ArticleEntity;
 import com.mingsoft.mdiy.biz.IDictBiz;
 import com.mingsoft.mdiy.entity.DictEntity;
 import net.mingsoft.base.util.JSONObject;
@@ -28,7 +33,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/${managerPath}/custom/mdiy/dict")
 public class CustomDictAction extends com.mingsoft.mdiy.action.BaseAction{
-	
+
+	/**
+	 * 文章管理业务处理层
+	 */
+	@Autowired
+	private IArticleBiz articleBiz;
+
+	/**
+	 * 栏目业务层
+	 */
+	@Autowired
+	private IColumnBiz columnBiz;
+
 	/**
 	 * 注入字典表业务层
 	 */	
@@ -96,11 +113,22 @@ public class CustomDictAction extends com.mingsoft.mdiy.action.BaseAction{
 	@RequestMapping("/form")
 	public String form(@ModelAttribute DictEntity dict,HttpServletResponse response,HttpServletRequest request,ModelMap model){
 		if(dict.getDictId() != null){
-			BaseEntity dictEntity = dictBiz.getEntity(dict.getDictId());			
+			DictEntity dictEntity =(DictEntity) dictBiz.getEntity(dict.getDictId());
 			model.addAttribute("dictEntity",dictEntity);
+
+			if(dictEntity.getDictType().equals("11")){
+				ArticleEntity list = articleBiz.getById(Integer.valueOf(dictEntity.getDictLabel()));
+				model.addAttribute("tColumnId",list.getColumn().getCategoryId());
+			}
+		}else {
+			model.addAttribute("tColumnId",0);
 		}
-		
-		return view ("/cms/customFormer/dict/form");
+
+		int appId =this.getAppId(request);
+		List<ColumnEntity> list = columnBiz.queryAll(appId, 7);
+		model.addAttribute("listColumn", JSONArray.toJSONString(list));
+
+		return view ("/mdiy/dict/form");
 	}
 	
 	/**
@@ -190,19 +218,8 @@ public class CustomDictAction extends com.mingsoft.mdiy.action.BaseAction{
 	@ResponseBody
 	public void save(@ModelAttribute DictEntity dict, HttpServletResponse response, HttpServletRequest request) {
 		dict.setAppId(BasicUtil.getAppId());
-
-		DictEntity dictEntity = new DictEntity();
-		dictEntity.setAppId(BasicUtil.getAppId());
-		dictEntity.setDictLabel(dict.getDictLabel());
-		dictEntity =(DictEntity) dictBiz.getEntity(dictEntity);
-
-		if(dictEntity == null || dictEntity.getDictId() == null){
-			dictBiz.saveEntity(dict);
-			this.outJson(response, JSONObject.toJSONString(dict));
-		}
-		else {
-			this.outJson(response, JSONObject.toJSONString(null));
-		}
+		dictBiz.saveEntity(dict);
+		this.outJson(response, JSONObject.toJSONString(dict));
 	}
 	
 	/**

@@ -37,7 +37,7 @@
 
 	<@ms.modal  modalName="selDict" title="选择类型" >
 		<@ms.modalBody>
-			<#assign peopleSexs=[{"id":"1","name":"文本"},{"id":"2","name":"图片"}]>
+			<#assign peopleSexs=[{"id":"1","name":"文本"},{"id":"2","name":"图片"},{"id":"11","name":"轮播图/内网"},{"id":"12","name":"轮播图/外网"}]>
 			<@ms.radio name="selDictRadio" label="" list=peopleSexs listKey="id" listValue="name" />
 			<@ms.modalButton>
             <!--模态框按钮组-->
@@ -63,7 +63,7 @@
 				        	field: 'dictLabel',
 				        	title: '标签名',
 				        	formatter:function(value,row,index) {
-				        		var url = "${managerPath}/mdiy/dict/form.do?dictId="+row.dictId;
+				        		var url = "${managerPath}/custom/mdiy/dict/form.do?dictType="+row.dictType+"&dictId="+row.dictId;
 				        		return "<a href=" +url+ " target='_self'>" + value + "</a>";
 				        	}
 				    	},{
@@ -75,13 +75,18 @@
 							formatter:function(value,row,index) {
 								if(value === '1'){
 								    return '文本';
-								}else {
+								}else if(value === '2'){
                                     return '图片';
+                                }else if(value === '11'){
+                                    return '轮播图/内网';
+                                }else if(value === '12'){
+                                    return '轮播图/外网';
                                 }
+                                return '';
 							}
 				    	},{
 				        	field: 'dictDescription',
-				        	title: '分类'
+				        	title: '描述'
 				    	},{
 				        	field: 'dictRemarks',
 				        	title: '备注信息'
@@ -93,7 +98,7 @@
         $(".selDict").modal();
 	})
     $("#selDictBtn").click(function(){
-		location.href ="${managerPath}/mdiy/dict/form.do?dictType="+$("input[type=radio][name=selDictRadio]:checked").val();
+		location.href ="${managerPath}/custom/mdiy/dict/form.do?dictType="+$("input[type=radio][name=selDictRadio]:checked").val();
     })
 	//删除按钮
 	$("#delDictBtn").click(function(){

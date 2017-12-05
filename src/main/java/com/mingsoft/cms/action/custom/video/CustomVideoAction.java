@@ -144,7 +144,8 @@ public class CustomVideoAction extends BaseAction {
         this.outJson(response, b);
     }
 
-
+    //上传视频信息
+    @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(value = "/addVideo", method = RequestMethod.POST)
     @ResponseBody
     public void addVideo(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
@@ -175,7 +176,8 @@ public class CustomVideoAction extends BaseAction {
         this.outJson(response, b);
     }
 
-
+    //添加留言信息
+    @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(value = "/addVideoMes", method = RequestMethod.POST)
     @ResponseBody
     public void addVideoMes(HttpServletResponse response, HttpServletRequest request, CustomVideoMessageEntity entity){
@@ -208,5 +210,24 @@ public class CustomVideoAction extends BaseAction {
         resmap.put("idlist", rids);
         customVideoMessageBizImpl.deleteByIds(resmap);
         this.outJson(response, true);
+    }
+
+    //查询视频列表
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @RequestMapping(value = "/getVideoWeb", method = RequestMethod.POST)
+    @ResponseBody
+    public void getVideoWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
+        List<CustomVideoEntity> b = customVideoBizImpl.getVideo(entity);
+
+        this.outJson(response, b);
+    }
+
+    //查询留言信息
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @RequestMapping(value = "/getVideoMesWeb", method = RequestMethod.POST)
+    @ResponseBody
+    public void getVideoMesWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoMessageEntity entity){
+        List<CustomVideoEntity> b = customVideoMessageBizImpl.getVideoMessage(entity);
+        this.outJson(response, b);
     }
 }

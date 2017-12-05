@@ -62,8 +62,8 @@
 				        	title: '数据值',
 				        	align: 'center',
                             formatter:function(value,row,index) {
-				        	    console.log(value)
-                                return "<img height='100' width='200' src='http://localhost:8089" + value + "'>";
+				        	    <#--console.log("${static}")-->
+                                return "<img height='100' width='200' src='" + basePath + value + "'>";
                             }
 				    	},
 						<#--{-->

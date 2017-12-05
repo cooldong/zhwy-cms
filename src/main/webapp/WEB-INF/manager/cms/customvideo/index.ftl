@@ -33,7 +33,7 @@
 	</@ms.panel>
 	
 	<@ms.modal  modalName="delPeopleUser" title="删除" >
-		<@ms.modalBody>删除此用户
+		<@ms.modalBody>删除
 			<@ms.modalButton>
 				<!--模态框按钮组-->
 				<@ms.button class="btn btn-danger rightDelete" value="删除"  id="deletePeopleUserBtn"  />
@@ -85,7 +85,7 @@
 				        	title: '视频1',
 				        	width:'200',
 							formatter:function (value, row, index) {
-								return '<video height="100" width="200" src="http://localhost:8089' + value + '" controls="controls">\n' +
+								return '<video height="100" width="200" src="' + basePath + value + '" controls="controls">\n' +
                                         'your browser does not support the video tag\n' +
                                         '</video>';
                             }
@@ -109,7 +109,7 @@
 				        	align: 'center',
 							formatter:function (value, row, index) {
 				        	    if(row.type == 2){
-                                    return '<video height="100" width="200" src="http://localhost:8089' + value + '" controls="controls">\n' +
+                                    return '<video height="100" width="200" src="' + basePath + value + '" controls="controls">\n' +
                                             'your browser does not support the video tag\n' +
                                             '</video>';
 								}

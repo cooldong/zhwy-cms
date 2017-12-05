@@ -28,7 +28,7 @@
 	</@ms.panel>
 	
 	<@ms.modal  modalName="delPeopleUser" title="删除" >
-		<@ms.modalBody>删除此用户
+		<@ms.modalBody>删除
 			<@ms.modalButton>
 				<!--模态框按钮组-->
 				<@ms.button class="btn btn-danger rightDelete" value="删除"  id="deletePeopleUserBtn"  />

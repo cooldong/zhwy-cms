@@ -7,19 +7,27 @@
 			<@ms.text name="basicTitle" colSm="2" width="400" label="文章标题"	title="文章标题" size="5"  placeholder="请输入文章标题"  value="${article.basicTitle?default('')}"  validation={"maxlength":"300","required":"true", "data-bv-notempty-message":"文章标题不能为空","data-bv-stringlength-message":"标题在300个字符以内!"}/>
 			<@ms.text name="basicSort"  colSm="2" width="200" label="自定义顺序" title="自定义顺序" size="5"  placeholder="请输入文章顺序" value="${article.basicSort?c?default(0)}" validation={"data-bv-between":"true","required":"true", "data-bv-between-message":"自定义顺序必须大于0","data-bv-between-min":"0", "data-bv-between-max":"99999999","data-bv-notempty-message":"自定义顺序不能为空"}/>
 
-			<#if (articleType == "11" || articleType == "12")>
+			<#if (articleType1?has_content && (articleType1 == "11" || articleType1 == "12"))>
 			    <div >
-					<@ms.text name="basicSort"  colSm="2" width="200"  value="${article.basicSort?c?default(0)}" validation={"required":"true"}/>
+					<@ms.text name="articleType"  label="文章属性" colSm="2" width="200"  value="${articleType?default(0)}" validation={"required":"true"}/>
 				</div>
+			<#else >
+				<@ms.radio colSm="2" name="checkbox" label="文章属性" list=articleType listKey="key"  listValue="value" />
 			</#if>
 
-			<#if articleType?has_content>
-				<@ms.checkboxlist colSm="2" name="checkbox" label="文章属性" list=articleType listKey="key"  listValue="value" />
-			</#if>
-			<@ms.formRow colSm="2" label="文章缩略图" width="400" >
+			<#if (articleType1?has_content && articleType1 == "12")>
+				<@ms.formRow colSm="2" label="视频缩略图" width="400" >
+					<@ms.uploadImg path="article" inputName="basicThumbnails" size="1" msg="提示:视频缩略图,支持jpg格式"  imgs="${article.basicThumbnails?default('')}"  />
+				</@ms.formRow>
+				<@ms.text name="articleSource" colSm="2" width="200" label="视频来源" title="视频来源" size="5"  placeholder="请输入视频来源"  value="${article.articleSource?default('')}" />
+			<#else >
+				<@ms.formRow colSm="2" label="文章缩略图" width="400" >
 					<@ms.uploadImg path="article" inputName="basicThumbnails" size="1" msg="提示:文章缩略图,支持jpg格式"  imgs="${article.basicThumbnails?default('')}"  />
-			</@ms.formRow>
-			<@ms.text name="articleSource" colSm="2" width="200" label="文章来源" title="文章来源" size="5"  placeholder="请输入文章来源"  value="${article.articleSource?default('')}" />
+				</@ms.formRow>
+				<@ms.text name="articleSource" colSm="2" width="200" label="文章来源" title="文章来源" size="5"  placeholder="请输入文章来源"  value="${article.articleSource?default('')}" />
+			</#if>
+
+
 			<@ms.text name="articleAuthor" colSm="2" width="200" label="文章作者" title="文章作者" size="5"  placeholder="请输入文章作者"  value="${article.articleAuthor?default('')}" />
 			<#if !isEditCategory><!-- 如果不是单篇 -->
 	            <@ms.formRow colSm="2" label="所属栏目" width="300">
@@ -56,7 +64,7 @@ $(function(){
 	//文章属性
 	$("#articleForm input[name='checkbox']").each(function(){
 		if(type!=""){
-			articleType = type.split(",");
+			articleType = type.split(":");
 		  	for(i=0;i<articleType.length;i++){
 				if($(this).val()==articleType[i]){
 					$(this).attr("checked",'true');

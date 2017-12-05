@@ -1,14 +1,13 @@
 <@ms.html5>
-	<@ms.nav title="用户基础信息表管理"></@ms.nav>
+	<@ms.nav title="视频管理"></@ms.nav>
 	<@ms.searchForm name="searchForm" isvalidation=true>
-		<@ms.text label="账号"  name="peopleName"  title="请输入用户昵称"  placeholder="请输入用户账号" value=""   />			  
-		<@ms.text label="昵称"  name="puNickname"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />			  
-		<@ms.text label="真实姓名"   name="puRealName"  title="请输入真实姓名"  placeholder="请输入真实姓名" value=""   />			  
-		<#assign status=[{"id":"-1","name":"全部"},{"id":"1","name":"男"},{"id":"2","name":"女"}]>
-		<@ms.select label="性别" list=status listValue="name" listKey="id"    name="puSex" value="" />
-		<#assign status=[{"id":"-1","name":"全部"},{"id":"0","name":"未审核"},{"id":"1","name":"已审核"}]>
-		<@ms.select label="审核状态" list=status listValue="name" listKey="id"    name="peopleState" value="" />
-		<@ms.date label="注册时间" name="peopleDateTimes"     value="" />
+		<#assign status=[{"id":"1","name":"类型1"},{"id":"2","name":"类型2"}]>
+		<@ms.select label="类型" list=status listValue="name" listKey="id"    name="type" value="" />
+
+		<@ms.text label="上传人1"  name="uploadname1"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />
+		<@ms.text label="上传人2"  name="uploadname2"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />
+		<#--<@ms.text label="真实姓名"   name="puRealName"  title="请输入真实姓名"  placeholder="请输入真实姓名" value=""   />-->
+		<#--<@ms.date label="注册时间" name="peopleDateTimes"     value="" />-->
 		<@ms.searchFormButton>
 			<@ms.queryButton onclick="search()"/>								
 		</@ms.searchFormButton>
@@ -33,7 +32,7 @@
 		</table>
 	</@ms.panel>
 	
-	<@ms.modal  modalName="delPeopleUser" title="用户数据删除" >
+	<@ms.modal  modalName="delPeopleUser" title="删除" >
 		<@ms.modalBody>删除此用户
 			<@ms.modalButton>
 				<!--模态框按钮组-->
@@ -84,22 +83,52 @@
 				    	},	{
 				        	field: 'url1',
 				        	title: '视频1',
-				        	width:'60'
+				        	width:'200',
+							formatter:function (value, row, index) {
+								return '<video height="100" width="200" src="http://localhost:8089' + value + '" controls="controls">\n' +
+                                        'your browser does not support the video tag\n' +
+                                        '</video>';
+                            }
 				    	},	{
 				        	field: 'des1',
 				        	title: '描述1',
 				        	width:'130'
 				    	}	,	{
+							field: 'uploadname1',
+							title: '上传人',
+							width:'130'
+						}	,
+						{
+							field: 'uploadtime1',
+							title: '上传时间',
+							width:'130'
+						}	,{
 				        	field: 'url2',
 				        	title: '视频2',
-				        	width: '40',
-				        	align: 'center'
+				        	width: '200',
+				        	align: 'center',
+							formatter:function (value, row, index) {
+				        	    if(row.type == 2){
+                                    return '<video height="100" width="200" src="http://localhost:8089' + value + '" controls="controls">\n' +
+                                            'your browser does not support the video tag\n' +
+                                            '</video>';
+								}
+							}
 				    	}	,	{
 				        	field: 'des2',
 				        	title: '描述2',
 				        	width: '100',
 				        	align: 'center'
 				    	},	{
+							field: 'uploadname2',
+							title: '上传人',
+							width:'130'
+						}	,
+						{
+							field: 'uploadtime2',
+							title: '上传时间',
+							width:'130'
+						},	{
 							title: '操作',
 							width:'100',
 							formatter:function(value,row,index) {

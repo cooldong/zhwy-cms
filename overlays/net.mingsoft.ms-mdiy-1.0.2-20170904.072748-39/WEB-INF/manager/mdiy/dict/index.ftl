@@ -1,7 +1,9 @@
 <@ms.html5>
 	<@ms.nav title="字典表管理"></@ms.nav>
 	<@ms.searchForm name="searchForm" isvalidation=true>
-		<@ms.text label="类型" name="dictType" value=""  width="240px;" placeholder="请输入类型" />
+		<#assign peopleSexs=[{"id":"11","name":"轮播图/内网"},{"id":"12","name":"轮播图/外网"}]>
+		<@ms.select label="类型"   name="dictType"  list=peopleSexs  listValue="name"   listKey="id"    value=""/>
+		<#--<@ms.text label="类型" name="dictType" value=""  width="240px;" placeholder="请输入类型" />-->
 		<@ms.searchFormButton>
 			 <@ms.queryButton onclick="search()"/> 
 		</@ms.searchFormButton>			
@@ -37,7 +39,7 @@
 
 	<@ms.modal  modalName="selDict" title="选择类型" >
 		<@ms.modalBody>
-			<#assign peopleSexs=[{"id":"1","name":"文本"},{"id":"2","name":"图片"},{"id":"11","name":"轮播图/内网"},{"id":"12","name":"轮播图/外网"}]>
+			<#assign peopleSexs=[{"id":"11","name":"轮播图/内网"},{"id":"12","name":"轮播图/外网"}]>
 			<@ms.radio name="selDictRadio" label="" list=peopleSexs listKey="id" listValue="name" />
 			<@ms.modalButton>
             <!--模态框按钮组-->
@@ -58,15 +60,21 @@
 	    				{
 				        	field: 'dictValue',
 				        	title: '数据值',
-				        	align: 'center'
-				    	},{
-				        	field: 'dictLabel',
-				        	title: '标签名',
-				        	formatter:function(value,row,index) {
-				        		var url = "${managerPath}/custom/mdiy/dict/form.do?dictType="+row.dictType+"&dictId="+row.dictId;
-				        		return "<a href=" +url+ " target='_self'>" + value + "</a>";
-				        	}
-				    	},{
+				        	align: 'center',
+                            formatter:function(value,row,index) {
+				        	    console.log(value)
+                                return "<img height='100' width='200' src='http://localhost:8089" + value + "'>";
+                            }
+				    	},
+						<#--{-->
+				        	<#--field: 'dictLabel',-->
+				        	<#--title: '标签名',-->
+				        	<#--formatter:function(value,row,index) {-->
+				        		<#--var url = "${managerPath}/custom/mdiy/dict/form.do?dictType="+row.dictType+"&dictId="+row.dictId;-->
+				        		<#--return "<a href=" +url+ " target='_self'>" + value + "</a>";-->
+				        	<#--}-->
+				    	<#--},-->
+						{
 				        	field: 'dictSort',
 				        	title: '排序'
 				    	},{
@@ -86,7 +94,11 @@
 							}
 				    	},{
 				        	field: 'dictDescription',
-				        	title: '描述'
+				        	title: '描述',
+							formatter:function(value,row,index) {
+								var url = "${managerPath}/custom/mdiy/dict/form.do?dictType="+row.dictType+"&dictId="+row.dictId;
+								return "<a href=" +url+ " target='_self'>" + value + "</a>";
+							}
 				    	},{
 				        	field: 'dictRemarks',
 				        	title: '备注信息'

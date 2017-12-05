@@ -1,14 +1,8 @@
 <@ms.html5>
-	<@ms.nav title="用户基础信息表管理"></@ms.nav>
+	<@ms.nav title="视频留言管理"></@ms.nav>
 	<@ms.searchForm name="searchForm" isvalidation=true>
-		<@ms.text label="账号"  name="peopleName"  title="请输入用户昵称"  placeholder="请输入用户账号" value=""   />			  
-		<@ms.text label="昵称"  name="puNickname"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />			  
-		<@ms.text label="真实姓名"   name="puRealName"  title="请输入真实姓名"  placeholder="请输入真实姓名" value=""   />			  
-		<#assign status=[{"id":"-1","name":"全部"},{"id":"1","name":"男"},{"id":"2","name":"女"}]>
-		<@ms.select label="性别" list=status listValue="name" listKey="id"    name="puSex" value="" />
-		<#assign status=[{"id":"-1","name":"全部"},{"id":"0","name":"未审核"},{"id":"1","name":"已审核"}]>
-		<@ms.select label="审核状态" list=status listValue="name" listKey="id"    name="peopleState" value="" />
-		<@ms.date label="注册时间" name="peopleDateTimes"     value="" />
+		<@ms.text label="账号"  name="createname"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />
+		<#--<@ms.date label="注册时间" name="peopleDateTimes"     value="" />-->
 		<@ms.searchFormButton>
 			<@ms.queryButton onclick="search()"/>								
 		</@ms.searchFormButton>
@@ -33,7 +27,7 @@
 		</table>
 	</@ms.panel>
 	
-	<@ms.modal  modalName="delPeopleUser" title="用户数据删除" >
+	<@ms.modal  modalName="delPeopleUser" title="删除" >
 		<@ms.modalBody>删除此用户
 			<@ms.modalButton>
 				<!--模态框按钮组-->
@@ -76,7 +70,11 @@
 				        	field: 'oknum',
 				        	title: 'oknum',
 				        	width:'60'
-				    	}
+				    	},	{
+							field: 'createname',
+							title: '创建人',
+							width:'60'
+						}
 					]
 	    })
 	})

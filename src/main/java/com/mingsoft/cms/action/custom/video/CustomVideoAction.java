@@ -10,6 +10,7 @@ import com.mingsoft.cms.entity.CustomVideoMessageEntity;
 import com.mingsoft.cms.utils.CustomStringUtils;
 import net.mingsoft.basic.bean.EUListBean;
 import net.mingsoft.basic.util.BasicUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,6 +65,12 @@ public class CustomVideoAction extends BaseAction {
             entity = new CustomVideoEntity();
         }
         BasicUtil.startPage();
+        if(StringUtils.isBlank(entity.getUploadname1())){
+            entity.setUploadname1(null);
+        }
+        if(StringUtils.isBlank(entity.getUploadname2())){
+            entity.setUploadname2(null);
+        }
         List<CustomVideoEntity> b = customVideoBizImpl.getVideo(entity);
         this.outJson(response, net.mingsoft.base.util.JSONArray.toJSONString(new EUListBean(b,(int)BasicUtil.endPage(b).getTotal()),new DoubleValueFilter(),new DateValueFilter("yyyy-MM-dd")));
     }
@@ -96,6 +103,10 @@ public class CustomVideoAction extends BaseAction {
         if(entity == null){
             entity = new CustomVideoMessageEntity();
         }
+        if(StringUtils.isBlank(entity.getCreatename())){
+            entity.setCreatename(null);
+        }
+
         BasicUtil.startPage();
         List<CustomVideoEntity> b = customVideoMessageBizImpl.getVideoMessage(entity);
         this.outJson(response, net.mingsoft.base.util.JSONArray.toJSONString(new EUListBean(b,(int)BasicUtil.endPage(b).getTotal()),new DoubleValueFilter(),new DateValueFilter("yyyy-MM-dd")));

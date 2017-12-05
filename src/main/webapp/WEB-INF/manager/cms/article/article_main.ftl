@@ -67,7 +67,7 @@
 	        title: '文章标题',
 	        formatter: function (value, row, index){
 				<@shiro.hasPermission name="article:update">	        
-	        	var url='${managerPath}/cms/article/'+row.articleID+"/edit.do";
+	        	var url='${managerPath}/cms/article/'+row.articleID+"/edit.do?articleType1="+row.articleType;
 	    		return "<a href="+url+" target='_self' >"+value+"</a>";
 	    		</@shiro.hasPermission> 
 	    		<@shiro.lacksPermission name="article:update">
@@ -83,9 +83,16 @@
 	        field: 'articleAuthor',
 	        title: '作者'
 	    }, {
-	        field: 'basicHit',
-	        title: '点击量',
-	        align: 'center'
+	        field: 'articleType',
+	        title: '类型',
+	        align: 'center',
+			formatter:function (value, row, index) {
+				if(value === "12,"){
+				    return "视频";
+				}else {
+				    return "其他";
+				}
+            }
 	    }, {
 	        field: 'basicSort',
 	        title: '排序',

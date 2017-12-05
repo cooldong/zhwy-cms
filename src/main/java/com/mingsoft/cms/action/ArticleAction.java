@@ -35,6 +35,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -232,7 +233,8 @@ public class ArticleAction extends BaseAction {
 			categoryTitle = null;
 		}
 		if(articleType1.equals("12") || articleType1.equals("11")){
-			mode.addAttribute("articleType", articleType1);
+			mode.addAttribute("articleType", articleType1+",");
+			mode.addAttribute("articleType1", articleType1);
 		}else {
 			// 文章属性
 			mode.addAttribute("articleType", articleType());
@@ -292,7 +294,10 @@ public class ArticleAction extends BaseAction {
 				sb.append(langtyp[j] + ",");
 			}
 		}
-		article.setArticleType(request.getParameter("checkboxType"));
+		if(StringUtils.isNotBlank(request.getParameter("checkboxType"))){
+			article.setArticleType(request.getParameter("checkboxType"));
+		}
+
 		// 问题:由于上传的图片路径后面可能带有｜符合。所以要进行将“｜”替换空
 		// 空值判断
 		if (!StringUtil.isBlank(article.getBasicThumbnails())) {
@@ -537,8 +542,12 @@ public class ArticleAction extends BaseAction {
 			@SuppressWarnings("static-access")
 			String listJsonString = JSONArray.toJSONString(list);
 			request.setAttribute("listColumn", listJsonString);
+
 			// 文章属性
 			model.addAttribute("articleType", articleType());
+
+			// 文章属性
+//			model.addAttribute("articleType", articleType());
 
 			articleEntity = (ArticleEntity) articleBiz.getEntity(id);
 			model.addAttribute("article", articleEntity);

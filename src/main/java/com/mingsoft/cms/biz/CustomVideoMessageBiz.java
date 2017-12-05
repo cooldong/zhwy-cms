@@ -26,6 +26,8 @@ public interface CustomVideoMessageBiz {
 
     List getVideoMessage(CustomVideoMessageEntity entity);
 
+    List getVideoMessageLimit(CustomVideoMessageEntity entity);
+
     int updateVideoMessage(CustomVideoMessageEntity entity);
 
     int deleteByIds(Map<String, Object> map);

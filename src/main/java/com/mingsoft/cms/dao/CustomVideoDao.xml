@@ -26,11 +26,11 @@
     select
     <include refid="Base_Column_List" />
     from custom_video
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{videoId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from custom_video
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{videoId,jdbcType=BIGINT}
   </delete>
 
   <select id="selectSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity" resultMap="BaseResultMap">
@@ -39,7 +39,7 @@
     from custom_video
     <where>
       <if test="id != null">
-        id =  #{id,jdbcType=BIGINT}
+        id =  #{videoId,jdbcType=BIGINT}
       </if>
       <if test="name != null">
         AND name = #{name,jdbcType=VARCHAR}
@@ -86,11 +86,65 @@
     </where>
   </select>
 
+  <select id="selectSelectiveLimit" parameterType="com.mingsoft.cms.entity.CustomVideoEntity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom_video
+    <where>
+      <if test="id != null">
+        id =  #{videoId,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+        AND name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="url1 != null">
+        AND url1 = #{url1,jdbcType=VARCHAR}
+      </if>
+      <if test="des1 != null">
+        AND des1 = #{des1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid1 != null">
+        AND uploadid1 = #{uploadid1,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname1 != null">
+        AND uploadname1 = #{uploadname1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic1 != null">
+        AND uploadpic1 = #{uploadpic1,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime1 != null">
+        AND uploadtime1 = #{uploadtime1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="url2 != null">
+        AND url2 = #{url2,jdbcType=VARCHAR}
+      </if>
+      <if test="des2 != null">
+        AND des2 = #{des2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadid2 != null">
+        AND uploadid2 = #{uploadid2,jdbcType=BIGINT}
+      </if>
+      <if test="uploadname2 != null">
+        AND uploadname2 = #{uploadname2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadpic2 != null">
+        AND uploadpic2 = #{uploadpic2,jdbcType=VARCHAR}
+      </if>
+      <if test="uploadtime2 != null">
+        AND uploadtime2 = #{uploadtime2,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
+
   <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
     delete from custom_video
     <where>
       <if test="id != null">
-        id = #{id,jdbcType=BIGINT}
+        id = #{videoId,jdbcType=BIGINT}
       </if>
       <if test="name != null">
         AND name = #{name,jdbcType=VARCHAR}
@@ -157,7 +211,7 @@
     url2, des2, uploadId2,
     uploadName2, uploadPic2, uploadTime2
     )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+    values (#{videoId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
     #{url1,jdbcType=VARCHAR}, #{des1,jdbcType=VARCHAR}, #{uploadid1,jdbcType=BIGINT},
     #{uploadname1,jdbcType=VARCHAR}, #{uploadpic1,jdbcType=VARCHAR}, #{uploadtime1,jdbcType=TIMESTAMP},
     #{url2,jdbcType=VARCHAR}, #{des2,jdbcType=VARCHAR}, #{uploadid2,jdbcType=BIGINT},
@@ -215,7 +269,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{videoId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -307,7 +361,7 @@
         uploadTime2 = #{uploadtime2,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{videoId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
     update custom_video
@@ -325,6 +379,6 @@
       uploadName2 = #{uploadname2,jdbcType=VARCHAR},
       uploadPic2 = #{uploadpic2,jdbcType=VARCHAR},
       uploadTime2 = #{uploadtime2,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{videoId,jdbcType=BIGINT}
   </update>
 </mapper>

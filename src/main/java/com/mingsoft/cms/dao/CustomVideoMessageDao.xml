@@ -11,19 +11,20 @@
     <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="videoId" jdbcType="BIGINT" property="videoid" />
     <result column="oknum" jdbcType="INTEGER" property="oknum" />
+    <result column="createpic" jdbcType="VARCHAR" property="createpic" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, comment, createId, createName, createTime, type, pid, videoId, oknum
+    id, comment, createId, createName, createTime, type, pid, videoId, oknum, createpic
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from custom_video_message
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{messageId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from custom_video_message
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{messageId,jdbcType=INTEGER}
   </delete>
 
   <delete id="deleteByIds" parameterType="java.util.Map">
@@ -45,7 +46,7 @@
     from custom_video_message
     <where>
       <if test="id != null">
-       id = #{id,jdbcType=INTEGER}
+       id = #{messageId,jdbcType=INTEGER}
       </if>
       <if test="comment != null">
         AND comment = #{comment,jdbcType=VARCHAR}
@@ -73,11 +74,49 @@
       </if>
     </where>
   </select>
+
+
+  <select id="selectSelectiveLimit" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from custom_video_message
+    <where>
+      <if test="id != null">
+        id = #{messageId,jdbcType=INTEGER}
+      </if>
+      <if test="comment != null">
+        AND comment = #{comment,jdbcType=VARCHAR}
+      </if>
+      <if test="createid != null">
+        AND createId = #{createid,jdbcType=BIGINT}
+      </if>
+      <if test="createname != null">
+        AND createName = #{createname,jdbcType=VARCHAR}
+      </if>
+      <if test="createtime != null">
+        AND createTime = #{createtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="type != null">
+        AND type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="pid != null">
+        AND pid = #{pid,jdbcType=BIGINT}
+      </if>
+      <if test="videoid != null">
+        AND videoId = #{videoid,jdbcType=BIGINT}
+      </if>
+      <if test="oknum != null">
+        AND oknum = #{oknum,jdbcType=INTEGER}
+      </if>
+    </where>
+    limit #{limit} offset #{offset}
+  </select>
+
   <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     delete from custom_video_message
     <where>
       <if test="id != null">
-        id = #{id,jdbcType=INTEGER}
+        id = #{messageId,jdbcType=INTEGER}
       </if>
       <if test="comment != null">
         AND comment = #{comment,jdbcType=VARCHAR}
@@ -110,10 +149,10 @@
   <insert id="insert" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     insert into custom_video_message (id, comment, createId, 
       createName, createTime, type, 
-      pid, videoId, oknum)
-    values (#{id,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{createid,jdbcType=BIGINT}, 
+      pid, videoId, oknum, createpic)
+    values (#{messageId,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{createid,jdbcType=BIGINT},
       #{createname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, 
-      #{pid,jdbcType=BIGINT}, #{videoid,jdbcType=BIGINT}, #{oknum,jdbcType=INTEGER})
+      #{pid,jdbcType=BIGINT}, #{videoid,jdbcType=BIGINT}, #{oknum,jdbcType=INTEGER}, #{createpic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     insert into custom_video_message
@@ -145,10 +184,13 @@
       <if test="oknum != null">
         oknum,
       </if>
+      <if test="createpic != null">
+        createpic,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{messageId,jdbcType=INTEGER},
       </if>
       <if test="comment != null">
         #{comment,jdbcType=VARCHAR},
@@ -173,6 +215,9 @@
       </if>
       <if test="oknum != null">
         #{oknum,jdbcType=INTEGER},
+      </if>
+      <if test="createpic != null">
+        #{createpic,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -203,8 +248,11 @@
       <if test="oknum != null">
         oknum = #{oknum,jdbcType=INTEGER},
       </if>
+      <if test="createpic != null">
+        createName = #{createpic,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{messageId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     update custom_video_message
@@ -215,7 +263,8 @@
       type = #{type,jdbcType=INTEGER},
       pid = #{pid,jdbcType=BIGINT},
       videoId = #{videoid,jdbcType=BIGINT},
-      oknum = #{oknum,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      oknum = #{oknum,jdbcType=INTEGER},
+      createpic = #{createpic,jdbcType=VARCHAR},
+    where id = #{messageId,jdbcType=INTEGER}
   </update>
 </mapper>

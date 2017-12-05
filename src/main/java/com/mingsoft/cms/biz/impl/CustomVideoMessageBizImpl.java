@@ -31,6 +31,19 @@ public class CustomVideoMessageBizImpl implements CustomVideoMessageBiz {
     @Override
     public boolean insertVideoMessage(CustomVideoMessageEntity entity) {
         int i = customVideoMessageDao.insertSelective(entity);
+        if(i > 0){
+            if(entity.getPid() != null){
+                CustomVideoMessageEntity pentity = customVideoMessageDao.selectByPrimaryKey(entity.getPid().intValue());
+                if(pentity != null){
+                    if(pentity.getOknum() != null){
+                        pentity.setOknum(pentity.getOknum() + 1);
+                    }else {
+                        pentity.setOknum(1);
+                    }
+                    customVideoMessageDao.updateByPrimaryKeySelective(pentity);
+                }
+            }
+        }
         return i>0;
     }
 
@@ -42,6 +55,11 @@ public class CustomVideoMessageBizImpl implements CustomVideoMessageBiz {
     @Override
     public List getVideoMessage(CustomVideoMessageEntity entity) {
         return customVideoMessageDao.selectSelective(entity);
+    }
+
+    @Override
+    public List getVideoMessageLimit(CustomVideoMessageEntity entity) {
+        return customVideoMessageDao.selectSelectiveLimit(entity);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.mingsoft.cms.dao;
 
 import com.mingsoft.base.dao.IBaseDao;
 import com.mingsoft.cms.entity.CustomVideoMessageEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public interface CustomVideoMessageDao extends IBaseDao {
     int updateByPrimaryKey(CustomVideoMessageEntity record);
 
     List<CustomVideoMessageEntity> selectSelective(CustomVideoMessageEntity record);
+
+    List<CustomVideoMessageEntity> selectSelectiveLimit(CustomVideoMessageEntity record);
 
     int deleteSelective(CustomVideoMessageEntity record);
 

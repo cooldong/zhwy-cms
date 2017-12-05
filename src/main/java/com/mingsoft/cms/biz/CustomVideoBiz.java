@@ -26,6 +26,8 @@ public interface CustomVideoBiz {
 
     List getVideo(CustomVideoEntity entity);
 
+    List getVideoLimit(CustomVideoEntity entity);
+
     int updateVideo(CustomVideoEntity entity);
 
     int deleteByIds(Map<String, Object> map);

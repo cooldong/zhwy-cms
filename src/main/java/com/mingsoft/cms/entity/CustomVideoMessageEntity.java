@@ -1,6 +1,7 @@
 package com.mingsoft.cms.entity;
 
 import com.mingsoft.basic.entity.BasicEntity;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
 
@@ -22,6 +23,16 @@ public class CustomVideoMessageEntity extends BasicEntity {
     private Long videoid;
 
     private Integer oknum;
+
+    private String createpic;
+
+    public String getCreatepic() {
+        return createpic;
+    }
+
+    public void setCreatepic(String createpic) {
+        this.createpic = createpic;
+    }
 
     public Integer getMessageId() {
         return messageId;
@@ -93,5 +104,26 @@ public class CustomVideoMessageEntity extends BasicEntity {
 
     public void setOknum(Integer oknum) {
         this.oknum = oknum;
+    }
+
+    @Transient
+    private Integer limit;
+    @Transient
+    private Integer offset;
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 }

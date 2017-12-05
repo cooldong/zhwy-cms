@@ -1,6 +1,7 @@
 package com.mingsoft.cms.entity;
 
 import com.mingsoft.basic.entity.BasicEntity;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
 
@@ -153,5 +154,26 @@ public class CustomVideoEntity extends BasicEntity {
 
     public void setUploadtime2(Date uploadtime2) {
         this.uploadtime2 = uploadtime2;
+    }
+
+    @Transient
+    private Integer limit;
+    @Transient
+    private Integer offset;
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
     }
 }

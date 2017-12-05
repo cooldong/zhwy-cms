@@ -217,7 +217,9 @@ public class CustomVideoAction extends BaseAction {
     @RequestMapping(value = "/getVideoWeb", method = RequestMethod.POST)
     @ResponseBody
     public void getVideoWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
-        List<CustomVideoEntity> b = customVideoBizImpl.getVideo(entity);
+
+
+        List<CustomVideoEntity> b = customVideoBizImpl.getVideoLimit(entity);
 
         this.outJson(response, b);
     }
@@ -227,7 +229,9 @@ public class CustomVideoAction extends BaseAction {
     @RequestMapping(value = "/getVideoMesWeb", method = RequestMethod.POST)
     @ResponseBody
     public void getVideoMesWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoMessageEntity entity){
-        List<CustomVideoEntity> b = customVideoMessageBizImpl.getVideoMessage(entity);
+
+        List<CustomVideoMessageEntity> b = customVideoMessageBizImpl.getVideoMessageLimit(entity);
+
         this.outJson(response, b);
     }
 }

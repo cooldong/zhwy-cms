@@ -50,6 +50,11 @@ public class CustomVideoBizImpl implements CustomVideoBiz{
     }
 
     @Override
+    public List getVideoLimit(CustomVideoEntity entity) {
+        return customVideoDao.selectSelectiveLimit(entity);
+    }
+
+    @Override
     public int updateVideo(CustomVideoEntity entity) {
         return customVideoDao.updateByPrimaryKeySelective(entity);
     }

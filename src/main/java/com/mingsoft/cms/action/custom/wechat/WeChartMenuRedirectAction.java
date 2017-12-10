@@ -83,12 +83,12 @@ public class WeChartMenuRedirectAction  {
 				peopleUser.setPeopleName(openId);
 				peopleUser.setPuNickname(userInfos.getString("nickname"));
 				peopleUser.setPeoplePassword(StringUtil.Md5("111111"));
-				peopleUser.setPuSex(Integer.valueOf(userInfos.getString("sex")));
+				peopleUser.setPuSex(userInfos.getInt("sex"));
 				peopleUser.setPuIcon(userInfos.getString("headimgurl"));
 				peopleUser.setPeopleState(0);
 				peopleUser.setPuAddress(userInfos.getString("country") + userInfos.getString("province") + userInfos.getString("city"));
 				peopleUser.setPeopleDateTime(new Date());
-				if(userInfos.getString("unionid") != null){
+				if(userInfos.has("unionid") && userInfos.getString("unionid") != null){
 					peopleUser.setPeopleCode(userInfos.getString("unionid"));
 				}
 

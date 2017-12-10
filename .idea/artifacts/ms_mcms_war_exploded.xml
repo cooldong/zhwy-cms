@@ -191,7 +191,6 @@
           <element id="library" level="project" name="Maven: org.apache.xmlgraphics:batik-css:1.7" />
           <element id="library" level="project" name="Maven: org.apache.xmlgraphics:batik-svg-dom:1.7" />
           <element id="library" level="project" name="Maven: org.apache.xmlgraphics:batik-svggen:1.7" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/net/mingsoft/ms-upgrader/1.0.3-SNAPSHOT/ms-upgrader-1.0.3-20170929.141410-12.jar" output-file-name="ms-upgrader-1.0.3-SNAPSHOT.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -8,11 +8,13 @@
 			<@ms.text name="basicSort"  colSm="2" width="200" label="自定义顺序" title="自定义顺序" size="5"  placeholder="请输入文章顺序" value="${article.basicSort?c?default(0)}" validation={"data-bv-between":"true","required":"true", "data-bv-between-message":"自定义顺序必须大于0","data-bv-between-min":"0", "data-bv-between-max":"99999999","data-bv-notempty-message":"自定义顺序不能为空"}/>
 
 			<#if (articleType1?has_content && (articleType1 == "11" || articleType1 == "12"))>
-			    <div >
+			    <div hidden>
 					<@ms.text name="articleType"  label="文章属性" colSm="2" width="200"  value="${articleType?default(0)}" validation={"required":"true"}/>
 				</div>
 			<#else >
-				<@ms.radio colSm="2" name="checkbox" label="文章属性" list=articleType listKey="key"  listValue="value" />
+				<div hidden>
+					<@ms.radio colSm="2" name="checkbox" label="文章属性" list=articleType listKey="key"  listValue="value" />
+				</div>
 			</#if>
 
 			<#if (articleType1?has_content && articleType1 == "12")>

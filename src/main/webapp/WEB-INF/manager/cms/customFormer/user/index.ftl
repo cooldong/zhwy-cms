@@ -17,11 +17,11 @@
 		<div id="toolbar">
 			<@ms.panelNav>
 				<@ms.buttonGroup>
-					<@ms.addButton id="addPeopleUserBtn"/>
+					<#--<@ms.addButton id="addPeopleUserBtn"/>-->
 					<@ms.delButton id="delPeopleUserBtn"/>
 				</@ms.buttonGroup>
 				<@ms.button id="audit" value="审核"/>
-				<@ms.button id="resetPass" value="重置密码"/>
+				<#--<@ms.button id="resetPass" value="重置密码"/>-->
 			</@ms.panelNav>
 		</div>
 		<table id="peopleUserList" 

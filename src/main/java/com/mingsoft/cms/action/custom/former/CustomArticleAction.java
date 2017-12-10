@@ -196,24 +196,27 @@ public class CustomArticleAction extends BaseAction {
 	 *            }
 	 */
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value = "/web/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/web/list", method = RequestMethod.GET)
 	@ResponseBody
 	public void weblist(@ModelAttribute ArticleEntity article, HttpServletRequest request, HttpServletResponse response) {
 
-		int appId = BasicUtil.getAppId();
+		int appId = 1;
+		String cid = request.getParameter("cid");
 		int[] ints = new int[1];
-		ints[0] = article.getColumn().getCategoryId();
+		ints[0] = Integer.valueOf(cid);
+		article.setBasicCategoryId(ints[0]);
 		List list = articleBiz.query(appId, ints, null, null, null, false, article);
 
 		this.outJson(response, JSONArray.toJSONString(list));
 	}
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value = "/web/single", method = RequestMethod.POST)
+	@RequestMapping(value = "/web/single", method = RequestMethod.GET)
 	@ResponseBody
-	public void websingle(@ModelAttribute ArticleEntity article, HttpServletRequest request, HttpServletResponse response) {
+	public void websingle( ArticleEntity article, HttpServletRequest request, HttpServletResponse response) {
 
-		ArticleEntity list = articleBiz.getById(article.getArticleID());
+		int aid = Integer.valueOf(request.getParameter("articleID"));
+		ArticleEntity list = articleBiz.getById(aid);
 
 		this.outJson(response, JSONArray.toJSONString(list));
 	}

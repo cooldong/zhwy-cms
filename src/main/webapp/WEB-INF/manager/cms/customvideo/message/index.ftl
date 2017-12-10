@@ -11,7 +11,7 @@
 		<div id="toolbar">
 			<@ms.panelNav>
 				<@ms.buttonGroup>
-					<@ms.addButton id="addPeopleUserBtn"/>
+					<#--<@ms.addButton id="addPeopleUserBtn"/>-->
 					<@ms.delButton id="delPeopleUserBtn"/>
 				</@ms.buttonGroup>
 			</@ms.panelNav>
@@ -57,7 +57,7 @@
 	    	columns: [{ checkbox: true},
 						{
 							field: 'messageId',
-							title: 'messageId',
+							title: '编号',
 							width:'10',
 							align: 'center'
 						},
@@ -66,11 +66,14 @@
 				        	title: '留言',
 				        	width:'10',
 				        	align: 'center'
-				    	},	{
-				        	field: 'oknum',
-				        	title: 'oknum',
-				        	width:'60'
-				    	},	{
+				    	},
+//						{
+//				        	field: 'oknum',
+//				        	title: 'oknum',
+//				        	width:'60'
+//				    	}
+//				    	,
+						{
 							field: 'createname',
 							title: '创建人',
 							width:'60'

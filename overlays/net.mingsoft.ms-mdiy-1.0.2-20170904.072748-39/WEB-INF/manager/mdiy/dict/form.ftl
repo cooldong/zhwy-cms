@@ -52,8 +52,9 @@
 			<#if (dictEntity.dictType == "12")>
 				<@ms.text label="外链地址" name="dictLabel" value="${dictEntity.dictLabel?default('')}"  width="240px;" placeholder="请输入外链地址" validation={"required":"false","maxlength":"50","data-bv-stringlength-message":"外链地址长度不能超过五十个字符长度!", "data-bv-notempty-message":"必填项目"}/>
 			</#if>
-
-				<@ms.text label="类型" name="dictType" value="${dictEntity.dictType?default('')}"  width="240px;" placeholder="请输入类型" validation={"required":"false","maxlength":"50","data-bv-stringlength-message":"类型长度不能超过五十个字符长度!", "data-bv-notempty-message":"必填项目"}/>
+				<div hidden>
+					<@ms.text label="类型" name="dictType" value="${dictEntity.dictType?default('')}"  width="240px;" placeholder="请输入类型" validation={"required":"false","maxlength":"50","data-bv-stringlength-message":"类型长度不能超过五十个字符长度!", "data-bv-notempty-message":"必填项目"}/>
+				</div>
     			<@ms.text label="描述" name="dictDescription" value="${dictEntity.dictDescription?default('')}"  width="240px;" placeholder="请输入描述" validation={"required":"false","maxlength":"50","data-bv-stringlength-message":"描述长度不能超过五十个字符长度!", "data-bv-notempty-message":"必填项目"}/>
     			<@ms.textarea label="备注信息" name="dictRemarks" value="${dictEntity.dictRemarks?default('')}"  width="240px;" placeholder="请输入备注信息" validation={"required":"true","maxlength":"50","data-bv-stringlength-message":"备注信息长度不能超过五十个字符长度!", "data-bv-notempty-message":"必填项目"}/>
     	</@ms.form>

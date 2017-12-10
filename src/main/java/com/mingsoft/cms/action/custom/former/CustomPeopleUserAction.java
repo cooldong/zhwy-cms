@@ -4,6 +4,9 @@ import com.mingsoft.base.constant.Const;
 import com.mingsoft.base.entity.BaseEntity;
 import com.mingsoft.base.filter.DateValueFilter;
 import com.mingsoft.base.filter.DoubleValueFilter;
+import com.mingsoft.basic.biz.IRoleBiz;
+import com.mingsoft.basic.entity.ManagerSessionEntity;
+import com.mingsoft.basic.entity.RoleEntity;
 import com.mingsoft.mdiy.biz.IDictBiz;
 import com.mingsoft.mdiy.entity.DictEntity;
 import com.mingsoft.people.bean.PeopleBean;
@@ -41,6 +44,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/${managerPath}/custom/people/peopleUser")
 public class CustomPeopleUserAction extends com.mingsoft.people.action.BaseAction{
+
+	/**
+	 * 注入角色业务层
+	 */
+	@Autowired
+	private IRoleBiz roleBiz;
 
 	/**
 	 * 注入字典表业务层
@@ -814,5 +823,17 @@ public class CustomPeopleUserAction extends com.mingsoft.people.action.BaseActio
 		}
 		this.outJson(response, ModelCode.PEOPLE_LOGIN, true, JSONObject.toJSONString(peopleEntity));
 
+	}
+
+
+	@RequestMapping("/checkRole")
+	@ResponseBody
+	public void list(@ModelAttribute RoleEntity role, HttpServletResponse response, HttpServletRequest request, ModelMap model) {
+		ManagerSessionEntity managerSession = getManagerBySession(request);
+		role.setRoleManagerId(managerSession.getManagerId());
+		role.setRoleName("后台用户");
+		BasicUtil.startPage();
+		List roleList = roleBiz.query(role);
+		this.outJson(response, net.mingsoft.base.util.JSONArray.toJSONString(new EUListBean(roleList,(int)BasicUtil.endPage(roleList).getTotal()),new DoubleValueFilter(),new DateValueFilter()));
 	}
 }

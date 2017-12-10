@@ -74,7 +74,7 @@
     <div class="ms-top">
         <!--头部LOGO-->
         <div class="ms-top-logo">
-            <img src="${skin_manager_logo}"/>
+            <#--<img src="${skin_manager_logo}"/>-->
             <!--span class="slideMenu">
                 <span class="icon iconfont icon-open">&#xe823;</span>
                 <span class="icon iconfont icon-close" style="display: none;">&#xe80d;</span>
@@ -115,10 +115,10 @@
                 </ul>
             </div>
 
-            <div class="ms-top-mstore" data-toggle="tooltip" data-placement="bottom" title="点击进入Mstore">
-                <span class="glyphicon glyphicon-th-large animated"></span>
-                <span class="mstore-update"></span>
-            </div>
+            <#--<div class="ms-top-mstore" data-toggle="tooltip" data-placement="bottom" title="点击进入Mstore">-->
+                <#--<span class="glyphicon glyphicon-th-large animated"></span>-->
+                <#--<span class="mstore-update"></span>-->
+            <#--</div>-->
         </div>
     </div>
 
@@ -159,10 +159,7 @@
     <!--右边开始-->
     <div class="ms-content">
         <div class="wellcome">
-            <h2>欢迎进入MS系统</h2>
-            <p>欢迎加群： 221335098 或到
-                <a href="http://ms.mingsoft.net/mbbs/main.do" target="_blank" style="text-decoration: none;">官方论坛进行技术交流</a>
-            </p>
+            <h2>欢迎进入智鸿物业</h2>
         </div>
         <div class="easyui-tabs">
         

@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class WeatherUtils {
 
-    public static Map<String, String> weatherInfo;
+    public static Map<String, Object> weatherInfo;
     public static Long timeStrap;
     public static Long timeInterval;
 
@@ -58,19 +58,9 @@ public class WeatherUtils {
             {
                 result1.append("\n").append(line);
             }
-//            System.out.println(result1);
-            com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(result1.toString());
 
-            String city = jsonObject.getString("city");
-            String date = jsonObject.getString("date");
-            com.alibaba.fastjson.JSONObject temp = (com.alibaba.fastjson.JSONObject) jsonObject.getJSONObject("data").getJSONArray("forecast").get(0);
-            String highTemp = temp.getString("high");
-            String lowTemp = temp.getString("low");
 
-            weatherInfo.put("city", city);
-            weatherInfo.put("date", date);
-            weatherInfo.put("highTemp", highTemp);
-            weatherInfo.put("lowTemp", lowTemp);
+            weatherInfo.put("result", JSON.parseObject(result1.toString()));
 
             timeStrap = System.currentTimeMillis();
         }
@@ -90,9 +80,6 @@ public class WeatherUtils {
             }
         }
 
-
-
-        System.out.println(result1);
     }
 
 }

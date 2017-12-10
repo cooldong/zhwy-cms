@@ -6,7 +6,7 @@
     	<@ms.form name="customVideoForm" isvalidation=true>
     		<@ms.hidden name="videoId" value="${(customVideoEntity.videoId)?default('')}"/>
 			<@ms.text label="视频名称" name="name" value="${(customVideoEntity.name)?default('')}"  width="240px;" placeholder="请输入视频名称" validation={"data-bv-stringlength":"true","maxlength":"50","data-bv-stringlength-message":"视频名称长度不能超过五十个字符长度!"}/>
-			<#assign isMenu=[{"id":"1","name":"类型1"},{"id":"2","name":"类型2"}]>
+			<#assign isMenu=[{"id":"1","name":"优等标准"},{"id":"2","name":"需要整改方案"}]>
 			<@ms.select  value="${(customVideoEntity.type)?default('')}" name="type" style="width: 25%;" id="videoTypeSelect" list=isMenu  listKey="id" listValue="name" label="类型"  title="类型" />
 			<@ms.formRow label="视频1" width="400">
 				<@ms.uploadFile path="customvideo"  inputName="url1" size="1"  msg="建议上传5M以下的文件"  maxSize="100" callBack="" isRename="false"/>

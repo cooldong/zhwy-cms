@@ -1,7 +1,7 @@
 <@ms.html5>
 	<@ms.nav title="视频管理"></@ms.nav>
 	<@ms.searchForm name="searchForm" isvalidation=true>
-		<#assign status=[{"id":"1","name":"类型1"},{"id":"2","name":"类型2"}]>
+		<#assign status=[{"id":"1","name":"优等标准"},{"id":"2","name":"需要整改方案"}]>
 		<@ms.select label="类型" list=status listValue="name" listKey="id"    name="type" value="" />
 
 		<@ms.text label="上传人1"  name="uploadname1"  title="请输入用户昵称"  placeholder="请输入用户昵称" value=""   />
@@ -16,7 +16,7 @@
 		<div id="toolbar">
 			<@ms.panelNav>
 				<@ms.buttonGroup>
-					<@ms.addButton id="addPeopleUserBtn"/>
+					<#--<@ms.addButton id="addPeopleUserBtn"/>-->
 					<@ms.delButton id="delPeopleUserBtn"/>
 				</@ms.buttonGroup>
 			</@ms.panelNav>
@@ -43,8 +43,8 @@
 
 	<@ms.modal  modalName="selDict" title="选择视频类型" >
 		<@ms.modalBody>
-			<#assign peopleSexs=[{"id":"1","name":"类型1"},{"id":"2","name":"类型2"}]>
-			<@ms.radio name="selDictRadio" label="" list=peopleSexs listKey="id" listValue="name" />
+			<#assign peopleSexs=[{"id":"1","name":"优等标准"},{"id":"2","name":"需要整改方案"}]>
+			<@ms.radio width="500"  name="selDictRadio" label="" list=peopleSexs listKey="id" listValue="name" />
 			<@ms.modalButton>
             <!--模态框按钮组-->
 				<@ms.button  value="确认"  id="selDictBtn"  />
@@ -78,7 +78,7 @@
 				        	title: '类型',
 				        	width:'60',
 				        	formatter:function(value,row,index) {
-				        		return value === 1?"类型1":"类型2";
+				        		return value === 1?"优等标准":"需要整改方案";
 				        	}
 				    	},	{
 				        	field: 'url1',

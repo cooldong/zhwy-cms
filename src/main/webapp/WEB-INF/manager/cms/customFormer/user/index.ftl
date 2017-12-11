@@ -81,7 +81,8 @@
 				        	width:'60',
 				        	formatter:function(value,row,index) {
 				        		var url = "${managerPath}/people/peopleUser/form.do?puPeopleId="+row.puPeopleId;
-				        		return "<a href=" +url+ " target='_self'>" + value + "</a>";
+				        		return value;
+//				        		return "<a href=" +url+ " target='_self'>" + value + "</a>";
 				        	}
 				    	},	{
 				        	field: 'puRealName',

@@ -234,7 +234,7 @@ public class ArticleAction extends BaseAction {
 		}
 		if(articleType1.equals("12") || articleType1.equals("11")){
 			mode.addAttribute("articleType", articleType1+",");
-			mode.addAttribute("articleType1", articleType1);
+			mode.addAttribute("articleType1", articleType1+",");
 		}else {
 			// 文章属性
 			mode.addAttribute("articleType", articleType());
@@ -419,7 +419,7 @@ public class ArticleAction extends BaseAction {
 		int appId = this.getAppId(request);
 		article.setBasicUpdateTime(new Timestamp(System.currentTimeMillis()));
 		// 文章类型
-		article.setArticleType(request.getParameter("checkboxType"));
+//		article.setArticleType(request.getParameter("checkboxType"));
 		// 问题:由于上传的图片路径后面可能带有｜符合。所以要进行将“｜”替换空
 		// 空值判断
 		if (!StringUtil.isBlank(article.getBasicThumbnails())) {
@@ -519,6 +519,8 @@ public class ArticleAction extends BaseAction {
 
 		// 如果_categoryId大于0表示是编辑封面栏目，应该先查询分类下面的唯一一篇文章
 		String categoryTitle = request.getParameter("categoryTitle");
+		String articleType1 = request.getParameter("articleType1");
+		model.addAttribute("articleType1", articleType1);
 		// 板块id
 		int categoryId = this.getInt(request, "categoryId", 0);
 		ArticleEntity articleEntity = null;
@@ -530,12 +532,12 @@ public class ArticleAction extends BaseAction {
 			int columnType = column.getColumnType();
 			model.addAttribute("article", articleEntity);
 			// 文章属性
-			model.addAttribute("articleType", articleType());
+//			model.addAttribute("articleType", articleType1);
 			model.addAttribute("categoryTitle", categoryTitle);
 			model.addAttribute("categoryId", categoryId);// 编辑封面
 			model.addAttribute("isEditCategory", true);// 编辑封面
 			model.addAttribute("columnType", columnType);
-			return view("/cms/article/article_form");
+			return view("/cms/article/article_form_edit");
 		} else if (id > 0) { // 文章id获取
 			// 允许编辑文章时更改分类
 			List<ColumnEntity> list = columnBiz.queryAll(appId, this.getModelCodeId(request, ModelCode.CMS_COLUMN));
@@ -544,7 +546,7 @@ public class ArticleAction extends BaseAction {
 			request.setAttribute("listColumn", listJsonString);
 
 			// 文章属性
-			model.addAttribute("articleType", articleType());
+//			model.addAttribute("articleType", articleType1);
 
 			// 文章属性
 //			model.addAttribute("articleType", articleType());
@@ -564,7 +566,7 @@ public class ArticleAction extends BaseAction {
 			}
 			model.addAttribute("columnType", columnType);
 			model.addAttribute("categoryId", column.getCategoryId());// 编辑封面
-			return view("/cms/article/article_form");
+			return view("/cms/article/article_form_edit");
 		} else {// 非法
 			// return view("/cms/article/article_form");
 			return this.redirectBack(request, true);

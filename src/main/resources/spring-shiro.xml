@@ -18,6 +18,7 @@
 				/html/** = anon
 				${managerPath}/login.do = anon
 				${managerPath}/checkLogin.do = anon
+				${managerPath}/custom/checkLogin.do = anon
 				${managerPath}/custom/** = anon
 				${managerPath}/logout = logout
 				${managerPath}/** = user

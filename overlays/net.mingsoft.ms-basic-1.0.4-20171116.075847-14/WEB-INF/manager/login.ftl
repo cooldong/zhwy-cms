@@ -26,7 +26,7 @@
 	<div class="page-container">
         <h1><#if app?has_content>${app.appName}</#if></h1>
         <div class="row" style="margin:0px;">
-	        <form class="form-horizontal" id="loginForm" action="${managerPath}/checkLogin.do">
+	        <form class="form-horizontal" id="loginForm" action="${managerPath}/custom/checkLogin.do">
 	            <input type="text" name="managerName" class="managerName"  placeholder="用户名" value="" autofocus/>
                 <div style="color:#F00; margin-top:10px; display:none;" id="show">用户名不能为空</div>
 	            <input type="password" name="managerPassword" style="  margin-top: 10px;" class="managerPassword" placeholder="密&nbsp;&nbsp;&nbsp;&nbsp;码"  value=""/>

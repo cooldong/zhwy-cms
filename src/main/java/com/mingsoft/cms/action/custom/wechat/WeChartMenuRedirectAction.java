@@ -100,9 +100,9 @@ public class WeChartMenuRedirectAction  {
 
 				//拼接前台访问地址
 				//http://yuebin616.iask.in/wap/index.jsp/?v=0.0.1&openid=$am{openid}/#/mall/weChartIn/
-				String url ="https://www.baidu.com/";//跳转地址
+				String url ="http://www.fangruidaojia.com/index.html#/";//跳转地址
 
-				url=url+URLEncoder.encode(openId, "UTF-8");
+				url=url + "?openId=" + URLEncoder.encode(openId, "UTF-8");
 
 				logger.info("微信公众账号转发地址："+url);
 

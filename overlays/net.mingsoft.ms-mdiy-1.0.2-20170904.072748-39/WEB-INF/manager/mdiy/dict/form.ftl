@@ -68,8 +68,8 @@
 		if(columnId !== '' && acticleId !== ''){
             $.ajax({
                 url:"${managerPath}/custom/mcms/article/web/list.do",
-                data:{"column.categoryId":columnId},
-                type:"post",
+                data:{"cid":columnId},
+                type:"get",
                 success:function (result) {
                     var s = "<option>请选择</option>";
                     $.each(result,function (index,value) {
@@ -88,8 +88,8 @@
     function selColumn(event,treeId,treeNode) {
         $.ajax({
 			url:"${managerPath}/custom/mcms/article/web/list.do",
-			data:{"column.categoryId":treeNode.categoryId},
-			type:"post",
+			data:{"cid":treeNode.categoryId},
+			type:"get",
 			success:function (result) {
 			    var s = "<option>请选择</option>";
 				$.each(result,function (index,value) {

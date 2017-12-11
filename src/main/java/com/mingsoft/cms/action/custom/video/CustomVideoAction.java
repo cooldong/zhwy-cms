@@ -1,5 +1,6 @@
 package com.mingsoft.cms.action.custom.video;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mingsoft.base.filter.DateValueFilter;
 import com.mingsoft.base.filter.DoubleValueFilter;
 import com.mingsoft.basic.action.BaseAction;
@@ -146,9 +147,13 @@ public class CustomVideoAction extends BaseAction {
 
     //上传视频信息
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping(value = "/addVideo", method = RequestMethod.POST)
+    @RequestMapping(value = "/addVideo", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
     @ResponseBody
-    public void addVideo(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
+    public void addVideo(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoEntity entity){
+        entity.setUploadtime1(new Date());
+        if(entity.getType() == 2){
+            entity.setUploadtime2(new Date());
+        }
         boolean b = customVideoBizImpl.insertVideo(entity);
         this.outJson(response, b);
     }
@@ -161,12 +166,20 @@ public class CustomVideoAction extends BaseAction {
         }
         this.outJson(response, true);
     }
-
-    @RequestMapping(value = "/updateVideo", method = RequestMethod.POST)
+    //更新视频
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @RequestMapping(value = "/updateVideo", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
     @ResponseBody
-    public void updateVideo(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
+    public void updateVideo(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoEntity entity){
+        entity.setUploadtime2(new Date());
         int b = customVideoBizImpl.updateVideo(entity);
-        this.outJson(response, b);
+        JSONObject jsonObject = new JSONObject();
+        if(b > 0){
+            jsonObject.put("result", true);
+        }else {
+            jsonObject.put("result", false);
+        }
+        this.outJson(response, jsonObject);
     }
 
     @RequestMapping(value = "/getVideoMes", method = RequestMethod.POST)
@@ -178,9 +191,10 @@ public class CustomVideoAction extends BaseAction {
 
     //添加留言信息
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping(value = "/addVideoMes", method = RequestMethod.POST)
+    @RequestMapping(value = "/addVideoMes", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
     @ResponseBody
-    public void addVideoMes(HttpServletResponse response, HttpServletRequest request, CustomVideoMessageEntity entity){
+    public void addVideoMes(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoMessageEntity entity){
+        entity.setCreatetime(new Date());
         boolean b = customVideoMessageBizImpl.insertVideoMessage(entity);
         this.outJson(response, b);
     }
@@ -214,9 +228,9 @@ public class CustomVideoAction extends BaseAction {
 
     //查询视频列表
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping(value = "/getVideoWeb", method = RequestMethod.POST)
+    @RequestMapping(value = "/getVideoWeb", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
     @ResponseBody
-    public void getVideoWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoEntity entity){
+    public void getVideoWeb(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoEntity entity){
 
 
         List<CustomVideoEntity> b = customVideoBizImpl.getVideoLimit(entity);
@@ -226,9 +240,9 @@ public class CustomVideoAction extends BaseAction {
 
     //查询留言信息
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping(value = "/getVideoMesWeb", method = RequestMethod.POST)
+    @RequestMapping(value = "/getVideoMesWeb", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
     @ResponseBody
-    public void getVideoMesWeb(HttpServletResponse response, HttpServletRequest request, CustomVideoMessageEntity entity){
+    public void getVideoMesWeb(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoMessageEntity entity){
 
         List<CustomVideoMessageEntity> b = customVideoMessageBizImpl.getVideoMessageLimit(entity);
 

@@ -137,6 +137,7 @@
         AND uploadtime2 = #{uploadtime2,jdbcType=TIMESTAMP}
       </if>
     </where>
+    ORDER BY id desc
     limit #{limit} offset #{offset}
   </select>
 

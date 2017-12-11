@@ -109,6 +109,7 @@
         AND oknum = #{oknum,jdbcType=INTEGER}
       </if>
     </where>
+    ORDER BY id DESC
     limit #{limit} offset #{offset}
   </select>
 

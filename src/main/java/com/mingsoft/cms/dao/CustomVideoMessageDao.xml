@@ -45,7 +45,7 @@
     <include refid="Base_Column_List" />
     from custom_video_message
     <where>
-      <if test="id != null">
+      <if test="messageId != null">
        id = #{messageId,jdbcType=INTEGER}
       </if>
       <if test="comment != null">
@@ -81,7 +81,7 @@
     <include refid="Base_Column_List" />
     from custom_video_message
     <where>
-      <if test="id != null">
+      <if test="messageId != null">
         id = #{messageId,jdbcType=INTEGER}
       </if>
       <if test="comment != null">
@@ -116,7 +116,7 @@
   <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     delete from custom_video_message
     <where>
-      <if test="id != null">
+      <if test="messageId != null">
         id = #{messageId,jdbcType=INTEGER}
       </if>
       <if test="comment != null">
@@ -158,7 +158,7 @@
   <insert id="insertSelective" parameterType="com.mingsoft.cms.entity.CustomVideoMessageEntity">
     insert into custom_video_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+      <if test="messageId != null">
         id,
       </if>
       <if test="comment != null">
@@ -190,7 +190,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+      <if test="messageId != null">
         #{messageId,jdbcType=INTEGER},
       </if>
       <if test="comment != null">

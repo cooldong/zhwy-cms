@@ -38,7 +38,7 @@
     <include refid="Base_Column_List" />
     from custom_video
     <where>
-      <if test="id != null">
+      <if test="videoId != null">
         id =  #{videoId,jdbcType=BIGINT}
       </if>
       <if test="name != null">
@@ -91,7 +91,7 @@
     <include refid="Base_Column_List" />
     from custom_video
     <where>
-      <if test="id != null">
+      <if test="videoId != null">
         id =  #{videoId,jdbcType=BIGINT}
       </if>
       <if test="name != null">
@@ -144,7 +144,7 @@
   <delete id="deleteSelective" parameterType="com.mingsoft.cms.entity.CustomVideoEntity">
     delete from custom_video
     <where>
-      <if test="id != null">
+      <if test="videoId != null">
         id = #{videoId,jdbcType=BIGINT}
       </if>
       <if test="name != null">

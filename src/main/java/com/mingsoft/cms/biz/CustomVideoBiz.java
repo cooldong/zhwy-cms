@@ -31,4 +31,6 @@ public interface CustomVideoBiz {
     int updateVideo(CustomVideoEntity entity);
 
     int deleteByIds(Map<String, Object> map);
+
+    CustomVideoEntity getById(Long videoId);
 }

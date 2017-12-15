@@ -70,4 +70,9 @@ public class CustomVideoBizImpl implements CustomVideoBiz{
 
         return customVideoDao.deleteByIds(map);
     }
+
+    @Override
+    public CustomVideoEntity getById(Long videoId) {
+        return customVideoDao.selectByPrimaryKey(videoId);
+    }
 }

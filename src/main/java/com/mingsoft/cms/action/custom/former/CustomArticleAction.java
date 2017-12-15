@@ -205,7 +205,7 @@ public class CustomArticleAction extends BaseAction {
 		int[] ints = new int[1];
 		ints[0] = Integer.valueOf(cid);
 		article.setBasicCategoryId(ints[0]);
-		List list = articleBiz.query(appId, ints, null, null, null, false, article);
+		List list = articleBiz.query(appId, ints, null, null, "sort", true, article);
 
 		this.outJson(response, JSONArray.toJSONString(list));
 	}

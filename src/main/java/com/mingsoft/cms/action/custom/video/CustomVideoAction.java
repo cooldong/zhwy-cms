@@ -238,6 +238,18 @@ public class CustomVideoAction extends BaseAction {
         this.outJson(response, b);
     }
 
+    //查询视频列表
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @RequestMapping(value = "/getVideoWebById", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")
+    @ResponseBody
+    public void getVideoWebById(HttpServletResponse response, HttpServletRequest request,@RequestBody CustomVideoEntity entity){
+
+
+        List<CustomVideoEntity> b = customVideoBizImpl.getVideoLimit(entity);
+        CustomVideoEntity r = b.size() > 0 ? b.get(0) : null;
+        this.outJson(response, r);
+    }
+
     //查询留言信息
     @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(value = "/getVideoMesWeb", method = RequestMethod.POST, consumes="application/json;charset=utf-8", produces="application/json;charset=utf-8")

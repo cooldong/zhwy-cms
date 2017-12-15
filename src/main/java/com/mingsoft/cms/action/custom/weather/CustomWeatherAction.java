@@ -33,12 +33,11 @@ public class CustomWeatherAction extends BaseAction {
 
         Long thisTime = System.currentTimeMillis();
         if(WeatherUtils.timeStrap == null || WeatherUtils.weatherInfo == null
-                || WeatherUtils.weatherInfo.get("highTemp") == null
                 || (thisTime - WeatherUtils.timeStrap > WeatherUtils.timeInterval )){
             WeatherUtils.getWeather();
         }
 
-        this.outJson(response, JSONObject.toJSON(WeatherUtils.weatherInfo));
+       this.outJson(response, JSONObject.toJSON(WeatherUtils.weatherInfo));
     }
 
 }

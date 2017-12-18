@@ -5,9 +5,12 @@ import com.mingsoft.cms.dao.CustomVideoDao;
 import com.mingsoft.cms.dao.CustomVideoMessageDao;
 import com.mingsoft.cms.entity.CustomVideoEntity;
 import com.mingsoft.cms.entity.CustomVideoMessageEntity;
+import com.mingsoft.cms.utils.VideoUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +38,16 @@ public class CustomVideoBizImpl implements CustomVideoBiz{
 
     @Override
     public boolean insertVideo(CustomVideoEntity entity) {
+        if(StringUtils.isNotBlank(entity.getUrl1())){
+            String thumbNailFilePath = VideoUtil.getThumbNailFilePath(entity.getUrl1(), String.valueOf(System.currentTimeMillis()));
+            entity.setThumbnail1(thumbNailFilePath);
+        }
+        if(StringUtils.isNotBlank(entity.getUrl2())){
+            String thumbNailFilePath = VideoUtil.getThumbNailFilePath(entity.getUrl2(), String.valueOf(System.currentTimeMillis()));
+            entity.setThumbnail2(thumbNailFilePath);
+        }
         int i = customVideoDao.insertSelective(entity);
+
         return i>0;
     }
 
@@ -56,6 +68,15 @@ public class CustomVideoBizImpl implements CustomVideoBiz{
 
     @Override
     public int updateVideo(CustomVideoEntity entity) {
+        if(StringUtils.isNotBlank(entity.getUrl1())){
+            String thumbNailFilePath = VideoUtil.getThumbNailFilePath(entity.getUrl1(), String.valueOf(System.currentTimeMillis()));
+            entity.setThumbnail1(thumbNailFilePath);
+        }
+        if(StringUtils.isNotBlank(entity.getUrl2())){
+            String thumbNailFilePath = VideoUtil.getThumbNailFilePath(entity.getUrl2(), String.valueOf(System.currentTimeMillis()));
+            entity.setThumbnail2(thumbNailFilePath);
+        }
+
         return customVideoDao.updateByPrimaryKeySelective(entity);
     }
 
@@ -75,4 +96,5 @@ public class CustomVideoBizImpl implements CustomVideoBiz{
     public CustomVideoEntity getById(Long videoId) {
         return customVideoDao.selectByPrimaryKey(videoId);
     }
+
 }

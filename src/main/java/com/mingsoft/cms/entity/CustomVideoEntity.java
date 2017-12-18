@@ -16,6 +16,8 @@ public class CustomVideoEntity extends BasicEntity {
 
     private String des1;
 
+    private String thumbnail1;
+
     private Long uploadid1;
 
     private String uploadname1;
@@ -27,6 +29,8 @@ public class CustomVideoEntity extends BasicEntity {
     private String url2;
 
     private String des2;
+
+    private String thumbnail2;
 
     private Long uploadid2;
 
@@ -175,5 +179,21 @@ public class CustomVideoEntity extends BasicEntity {
 
     public void setOffset(Integer offset) {
         this.offset = offset;
+    }
+
+    public String getThumbnail1() {
+        return thumbnail1;
+    }
+
+    public void setThumbnail1(String thumbnail1) {
+        this.thumbnail1 = thumbnail1;
+    }
+
+    public String getThumbnail2() {
+        return thumbnail2;
+    }
+
+    public void setThumbnail2(String thumbnail2) {
+        this.thumbnail2 = thumbnail2;
     }
 }
